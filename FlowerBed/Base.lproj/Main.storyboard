@@ -44,6 +44,7 @@
                     <connections>
                         <outlet property="pageControl" destination="xWY-6d-XDc" id="9LK-xK-GEY"/>
                         <outlet property="scrollView" destination="tV6-4G-r8p" id="zPN-gm-jHa"/>
+                        <segue destination="reW-Ec-kes" kind="show" identifier="selectColor" id="rCV-A1-Ti7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -62,7 +63,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVJ-0Z-X74" customClass="ColorWell" customModule="FlowerBed" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVJ-0Z-X74" customClass="ColorWell" customModule="FlowerBed" customModuleProvider="target">
                                 <rect key="frame" x="278" y="37" width="45" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="YUc-26-k3T"/>
@@ -72,11 +73,11 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lq0-Mn-E6Y" customClass="HuePicker" customModule="FlowerBed" customModuleProvider="target">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lq0-Mn-E6Y" customClass="HuePicker" customModule="FlowerBed" customModuleProvider="target">
                                 <rect key="frame" x="170" y="354" width="256" height="45"/>
                                 <color key="backgroundColor" red="0.88715994359999995" green="0.2287584245" blue="0.22893077140000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dmF-6k-ff2" customClass="ColorPicker" customModule="FlowerBed" customModuleProvider="target">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dmF-6k-ff2" customClass="ColorPicker" customModule="FlowerBed" customModuleProvider="target">
                                 <rect key="frame" x="170" y="90" width="256" height="256"/>
                                 <color key="backgroundColor" red="0.88715994359999995" green="0.2287584245" blue="0.22893077140000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -84,29 +85,73 @@
                                     <constraint firstAttribute="height" constant="256" id="vrC-Ru-3Wb"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odU-Aq-cPL">
-                                <rect key="frame" x="157" y="407" width="286" height="46"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="49"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OMh-uP-WMZ">
-                                <rect key="frame" x="178" y="464" width="50" height="50"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RAV-OI-4v1">
+                                <rect key="frame" x="170" y="407" width="256" height="128"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Flower1" translatesAutoresizingMaskIntoConstraints="NO" id="0yW-hw-Djh">
+                                        <rect key="frame" x="13" y="15" width="50" height="50"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Flower2" translatesAutoresizingMaskIntoConstraints="NO" id="GVT-dm-HoE">
+                                        <rect key="frame" x="103" y="15" width="50" height="50"/>
+                                    </imageView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="l7m-2V-UMJ">
+                                        <rect key="frame" x="0.0" y="92" width="256" height="29"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                            <segment title="Third"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Flower3" translatesAutoresizingMaskIntoConstraints="NO" id="m7q-s0-Lgj">
+                                        <rect key="frame" x="188" y="15" width="50" height="50"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8M-lJ-mij">
+                                <rect key="frame" x="258" y="550" width="80" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="Set"/>
+                                <connections>
+                                    <action selector="setColorAndType:" destination="reW-Ec-kes" eventType="touchUpInside" id="dPk-iw-8l3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="REi-eZ-u2F" firstAttribute="top" secondItem="RAV-OI-4v1" secondAttribute="bottom" constant="65" id="7Ua-kY-dm1"/>
+                            <constraint firstItem="YVJ-0Z-X74" firstAttribute="centerX" secondItem="IeS-OH-kxH" secondAttribute="centerX" id="E9w-YA-DbS"/>
+                            <constraint firstItem="RAV-OI-4v1" firstAttribute="top" secondItem="lq0-Mn-E6Y" secondAttribute="bottom" constant="8" id="OF1-N7-2xD"/>
+                            <constraint firstItem="lq0-Mn-E6Y" firstAttribute="top" secondItem="dmF-6k-ff2" secondAttribute="bottom" constant="8" id="P5X-VU-OmC"/>
+                            <constraint firstItem="dmF-6k-ff2" firstAttribute="top" secondItem="YVJ-0Z-X74" secondAttribute="bottom" constant="8" id="SS2-Qc-IxM"/>
+                            <constraint firstItem="REi-eZ-u2F" firstAttribute="top" secondItem="R8M-lJ-mij" secondAttribute="bottom" constant="20" id="StE-cf-a2E"/>
+                            <constraint firstItem="RAV-OI-4v1" firstAttribute="centerX" secondItem="IeS-OH-kxH" secondAttribute="centerX" id="Uga-w8-3tM"/>
+                            <constraint firstItem="dmF-6k-ff2" firstAttribute="centerX" secondItem="IeS-OH-kxH" secondAttribute="centerX" id="eDg-s3-fPf"/>
+                            <constraint firstItem="YVJ-0Z-X74" firstAttribute="top" secondItem="IzN-Tm-8jO" secondAttribute="bottom" constant="17" id="h1f-7f-sKv"/>
+                            <constraint firstItem="R8M-lJ-mij" firstAttribute="centerX" secondItem="IeS-OH-kxH" secondAttribute="centerX" id="pxs-VV-evR"/>
+                            <constraint firstItem="lq0-Mn-E6Y" firstAttribute="centerX" secondItem="IeS-OH-kxH" secondAttribute="centerX" id="wu3-y2-H3b"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="3qJ-bl-vw9"/>
                     <connections>
                         <outlet property="colorPicker" destination="dmF-6k-ff2" id="nJE-RR-f7F"/>
                         <outlet property="colorWell" destination="YVJ-0Z-X74" id="f8R-Kg-RFa"/>
                         <outlet property="huePicker" destination="lq0-Mn-E6Y" id="pPc-hv-dfn"/>
-                        <outlet property="imageView" destination="OMh-uP-WMZ" id="j0b-q4-00y"/>
-                        <outlet property="label" destination="odU-Aq-cPL" id="EDH-FW-vLe"/>
+                        <outlet property="imageView1" destination="0yW-hw-Djh" id="vHN-D4-x3N"/>
+                        <outlet property="imageView2" destination="GVT-dm-HoE" id="NWg-Fg-EyI"/>
+                        <outlet property="imageview3" destination="m7q-s0-Lgj" id="tz5-Lr-hHI"/>
+                        <outlet property="segmentedControl" destination="l7m-2V-UMJ" id="Wzc-Tm-YbY"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="setColor" id="PZY-TQ-a2n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ry-j3-bN3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="565" y="1154"/>
+            <point key="canvasLocation" x="565" y="1448"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Flower1" width="172" height="172"/>
+        <image name="Flower2" width="172" height="172"/>
+        <image name="Flower3" width="183" height="183"/>
+    </resources>
 </document>

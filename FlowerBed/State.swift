@@ -11,10 +11,10 @@ import UIKit
 
 struct Flower {
     var color: UIColor;
-    var image: UIImage;
+    var image: String;
     var number: Int;
     
-    init(no: Int, colour: UIColor, img: UIImage) {
+    init(no: Int, colour: UIColor, img: String) {
         number = no;
         color = colour;
         image = img;
@@ -72,11 +72,14 @@ class State
     var selectedFlowerIndex: Int = 0;
     
     func build() {
-        let flower1: Flower = Flower(no: 0, colour: UIColor.blueColor(), img: UIImage(named: "Flower1")!);
-        let flower2: Flower = Flower(no: 1, colour: UIColor.clearColor(), img: UIImage(named: "Flower1")!);
-        let flower3: Flower = Flower(no: 2, colour: UIColor.redColor(), img: UIImage(named: "Flower2")!);
-        let flower4: Flower = Flower(no: 3, colour: UIColor.yellowColor(), img: UIImage(named: "Flower1")!);
-        let flower5: Flower = Flower(no: 4, colour: UIColor.redColor(), img: UIImage(named: "Flower3")!);
+        if (self.flowerBeds.count > 0) {
+            return;
+        }
+        let flower1: Flower = Flower(no: 0, colour: UIColor.blueColor(), img: "Flower1");
+        let flower2: Flower = Flower(no: 1, colour: UIColor.clearColor(), img: "Flower1");
+        let flower3: Flower = Flower(no: 2, colour: UIColor.redColor(), img: "Flower2");
+        let flower4: Flower = Flower(no: 3, colour: UIColor.yellowColor(), img: "Flower1");
+        let flower5: Flower = Flower(no: 4, colour: UIColor.redColor(), img: "Flower3");
         let flowers: [Flower] = [flower1, flower2, flower3, flower4,flower5];
         
         let flowerBedRow1: FlowerBedRow = FlowerBedRow(no: 0, flowersInfo: flowers);
@@ -89,6 +92,15 @@ class State
         let flowerBed: FlowerBed = FlowerBed(no: 0, flowerRows: flowerBedRows);
         
         self.flowerBeds.append(flowerBed);
+    }
+    
+    func setFlower(flowerImgName: String, flowerColor: UIColor) {
+        self.flowerBeds[currentBedNo].rows[selectedFlowerBedRow - 1].flowers[self.selectedFlowerIndex].image = flowerImgName;
+        self.flowerBeds[currentBedNo].rows[selectedFlowerBedRow - 1].flowers[self.selectedFlowerIndex].color = flowerColor;
+        //var row: FlowerBedRow = self.flowerBeds[currentBedNo].rows[selectedFlowerBedRow - 1];
+        //var flower:Flower  = row.flowers[self.selectedFlowerIndex];
+        //flower.image = flowerImgName;
+        //flower.color = flowerColor;
     }
     
     func calFlowerPosition() {

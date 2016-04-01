@@ -16,6 +16,9 @@ class ViewController: UIViewController, UIScrollViewDelegate
     var colors: [UIColor] = [UIColor.clearColor(), UIColor.clearColor(), UIColor.clearColor(), UIColor.clearColor(), UIColor.clearColor(), UIColor.clearColor()];
     var frame: CGRect = CGRectMake(0, 0, 0, 0);
     var flowerBeds: [FlowerBed] = [];
+    var flowerRowsView: Dictionary<Int, [UIView]> = Dictionary<Int, [UIView]>();
+    var buttons: Dictionary<Int, [UIButton]> = Dictionary<Int, [UIButton]>();
+    var subViews: [UIView] = [];
     var state: State? = nil;
 
     override func viewDidLoad() {
@@ -40,11 +43,14 @@ class ViewController: UIViewController, UIScrollViewDelegate
     
     override func viewDidAppear(animated: Bool) {
         
+        self.scrollView?.contentOffset.x = CGFloat(CGFloat(self.state!.currentBedNo) * scrollView!.frame.size.width);
+        
         self.scrollView?.pagingEnabled = true;
         self.scrollView?.showsHorizontalScrollIndicator = false;
         self.scrollView?.showsVerticalScrollIndicator = false;
         self.scrollView?.scrollsToTop = false;
         for index in 0..<colors.count {
+            self.flowerRowsView[index] = [];
             let addRowButton: UIButton = UIButton(type: UIButtonType.ContactAdd);
             addRowButton.layer.cornerRadius = 20;
             addRowButton.frame.origin = CGPointMake(100, 0);
@@ -65,8 +71,17 @@ class ViewController: UIViewController, UIScrollViewDelegate
             
             self.addToView(subView, index: index);
             
+            if (self.flowerRowsView[index]?.count == 5) {
+                addRowButton.alpha = 0;
+            }
+            else if (self.flowerRowsView[index]?.count == 0) {
+                removeRowButton.alpha = 0;
+            }
+            
+            self.buttons[index] = [addRowButton, removeRowButton];
             subView.addSubview(addRowButton);
             subView.addSubview(removeRowButton);
+            self.subViews.append(subView);
             self.scrollView?.addSubview(subView);
         }
         
@@ -98,12 +113,13 @@ class ViewController: UIViewController, UIScrollViewDelegate
         if (self.flowerBeds.count - 1 >= index) {
             let flowerBed: FlowerBed = self.flowerBeds[index];
             for i in 0..<flowerBed.rows.count {
-                let y = paddingHeight + (50 + paddingHeight) * Float(i);
+                let y: Float = paddingHeight + (50 + paddingHeight) * Float(i);
+                let view: UIView = UIView(frame: CGRectMake(0, CGFloat(y), width, 50));
                 for j in 0..<flowerBed.rows[i].flowers.count {
                     let x = paddingWidth + (50 + paddingWidth) * Float(j);
-                    let imageView: UIImageView = UIImageView(image: flowerBed.rows[i].flowers[j].image);
+                    let imageView: UIImageView = UIImageView(image: UIImage(named: flowerBed.rows[i].flowers[j].image));
                     imageView.userInteractionEnabled = true;
-                    imageView.frame.origin = CGPointMake(CGFloat(x), CGFloat(y));
+                    imageView.frame.origin = CGPointMake(CGFloat(x), 0);
                     imageView.frame.size = CGSizeMake(50, 50);
                     imageView.backgroundColor = flowerBed.rows[i].flowers[j].color;
                     imageView.layer.cornerRadius = 50 / 2;
@@ -114,8 +130,10 @@ class ViewController: UIViewController, UIScrollViewDelegate
                     let selector: Selector = #selector(self.flowerClicked(_:));
                     let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: selector);
                     imageView.addGestureRecognizer(singleTap);
-                    subView.addSubview(imageView);
+                    view.addSubview(imageView);
                 }
+                self.flowerRowsView[index]?.append(view);
+                subView.addSubview(view);
             }
         }
     }
@@ -124,7 +142,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
     func buildRow(number: Int) -> FlowerBedRow? {
         var flowers: [Flower] = [];
         for i in 0..<4 {
-            let flower: Flower = Flower(no: i, colour: UIColor.clearColor(), img: UIImage(named: "flower")!);
+            let flower: Flower = Flower(no: i, colour: UIColor.clearColor(), img: "flower");
             flowers.append(flower);
         }
         let flowerBedRow: FlowerBedRow = FlowerBedRow(no: number, flowersInfo: flowers);
@@ -158,6 +176,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
         print("No." + String(self.state?.selectedFlowerNo) + "flower is clicked!!!");
         self.state?.calFlowerPosition();
         print("Clicked Flower position is Row : " + String(self.state?.selectedFlowerBedRow) + " index : " + String(self.state?.selectedFlowerIndex));
+        self.performSegueWithIdentifier("selectColor", sender: self);
     }
     
     func scrollPage() {
@@ -167,17 +186,89 @@ class ViewController: UIViewController, UIScrollViewDelegate
     
     func createRow(sender: UIButton) {
         print("create button is clicked");
-        self.viewDidAppear(true);
+        if (self.flowerRowsView[(self.state?.currentBedNo)!]?.count == 5) {
+            return;
+        }
+        let count: Int = (self.flowerRowsView[(self.state?.currentBedNo)!]?.count)!;
+        sender.alpha = 1;
+        self.buttons[(self.state?.currentBedNo)!]![1].alpha = 1;
+        let height: CGFloat = self.scrollView!.frame.size.height - 100;
+        let paddingHeight: Float = Float(height - CGFloat(5 * 50)) / 6;
+        let width: CGFloat = self.scrollView!.frame.size.width;
+        let paddingWidth: Float = Float(width - CGFloat(5 * 50)) / 6;
+        let y = (paddingHeight + 50) * Float(count) + paddingHeight;
+        let view: UIView = UIView(frame: CGRectMake(0, CGFloat(y), width, 50));
+        var k: Int = 5 * count + 1;
+        for j in 0..<5 {
+            let x = paddingWidth + (50 + paddingWidth) * Float(j);
+            let imageView: UIImageView = UIImageView(image: UIImage(named: "Flower1"));
+            imageView.userInteractionEnabled = true;
+            imageView.frame.origin = CGPointMake(CGFloat(x), 0);
+            imageView.frame.size = CGSizeMake(50, 50);
+            imageView.backgroundColor = UIColor.clearColor();
+            imageView.layer.cornerRadius = 50 / 2;
+            imageView.clipsToBounds = true;
+            imageView.tag = k;
+            k += 1;
+            let selector: Selector = #selector(self.flowerClicked(_:));
+            let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: selector);
+            imageView.addGestureRecognizer(singleTap);
+            view.addSubview(imageView);
+        }
+        self.flowerRowsView[(self.state?.currentBedNo)!]?.append(view);
+        self.subViews[(self.state?.currentBedNo)!].addSubview(view);
+        
+        let flower1: Flower = Flower(no: 0, colour: UIColor.clearColor(), img: "Flower1");
+        let flower2: Flower = Flower(no: 1, colour: UIColor.clearColor(), img: "Flower1");
+        let flower3: Flower = Flower(no: 2, colour: UIColor.clearColor(), img: "Flower1");
+        let flower4: Flower = Flower(no: 3, colour: UIColor.clearColor(), img: "Flower1");
+        let flower5: Flower = Flower(no: 4, colour: UIColor.clearColor(), img: "Flower1");
+        let flowers: [Flower] = [flower1, flower2, flower3, flower4,flower5];
+        let flowerBedRow: FlowerBedRow = FlowerBedRow(no: count - 1, flowersInfo: flowers);
+        
+        if (self.state?.flowerBeds.count <= self.state?.currentBedNo) {
+            for i in self.state!.flowerBeds.count..<self.state!.currentBedNo + 1 {
+                let flowerBed: FlowerBed = FlowerBed(no: i, flowerRows: []);
+                self.state?.flowerBeds.append(flowerBed);
+            }
+        }
+        
+        self.state?.flowerBeds[(self.state?.currentBedNo)!].rows.append(flowerBedRow);
+        self.flowerBeds = (self.state?.flowerBeds)!;
+        
+        if (self.flowerRowsView[(self.state?.currentBedNo)!]?.count == 5) {
+            sender.alpha = 0;
+        }
+        
+        print(self.view);
     }
     
     func removeRow(sender: UIButton) {
         print("remove button is clicked");
+        var views: [UIView] = self.flowerRowsView[(self.state?.currentBedNo)!]!;
+        sender.alpha = 1;
+        self.buttons[(self.state?.currentBedNo)!]![0].alpha = 1;
+        if (views.count == 0) {
+            sender.alpha = 0;
+        }
+        else {
+            let view: UIView = views[views.count - 1];
+            view.removeFromSuperview();
+            self.flowerRowsView[(self.state?.currentBedNo)!]?.popLast();
+            self.flowerBeds[(self.state?.currentBedNo)!].rows.popLast();
+            self.state?.flowerBeds = self.flowerBeds;
+            if (self.flowerRowsView[(self.state?.currentBedNo)!]?.count == 0) {
+                sender.alpha = 0;
+            }
+        }
+        
     }
     
     //MARK: - Delegate
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         let page: Int = Int(scrollView.contentOffset.x / scrollView.frame.size.width);
         self.pageControl.currentPage = page;
+        self.state?.currentBedNo = page;
     }
 
 }
