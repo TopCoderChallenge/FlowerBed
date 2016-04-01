@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F7746001CABBB4D003ADB97 /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7745FF1CABBB4D003ADB97 /* ColorPicker.swift */; };
+		9F7746051CABBB94003ADB97 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7746011CABBB94003ADB97 /* ColorPickerController.swift */; };
+		9F7746061CABBB94003ADB97 /* ColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7746021CABBB94003ADB97 /* ColorWell.swift */; };
+		9F7746071CABBB94003ADB97 /* HuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7746031CABBB94003ADB97 /* HuePicker.swift */; };
+		9F7746081CABBB94003ADB97 /* PickerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7746041CABBB94003ADB97 /* PickerImage.swift */; };
+		9F77460B1CABBC1A003ADB97 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77460A1CABBC1A003ADB97 /* ColorPickerViewController.swift */; };
+		9F77462B1CABF27C003ADB97 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77462A1CABF27C003ADB97 /* State.swift */; };
 		9F8A2E391CAA5E26000DFC6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8A2E381CAA5E26000DFC6D /* AppDelegate.swift */; };
 		9F8A2E3B1CAA5E26000DFC6D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8A2E3A1CAA5E26000DFC6D /* ViewController.swift */; };
 		9F8A2E3E1CAA5E26000DFC6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F8A2E3C1CAA5E26000DFC6D /* Main.storyboard */; };
@@ -34,6 +41,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9F7745FF1CABBB4D003ADB97 /* ColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
+		9F7746011CABBB94003ADB97 /* ColorPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
+		9F7746021CABBB94003ADB97 /* ColorWell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorWell.swift; sourceTree = "<group>"; };
+		9F7746031CABBB94003ADB97 /* HuePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuePicker.swift; sourceTree = "<group>"; };
+		9F7746041CABBB94003ADB97 /* PickerImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerImage.swift; sourceTree = "<group>"; };
+		9F77460A1CABBC1A003ADB97 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
+		9F77462A1CABF27C003ADB97 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		9F8A2E351CAA5E25000DFC6D /* FlowerBed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlowerBed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F8A2E381CAA5E26000DFC6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F8A2E3A1CAA5E26000DFC6D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +88,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F7746091CABBBA0003ADB97 /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				9F7746011CABBB94003ADB97 /* ColorPickerController.swift */,
+				9F7746021CABBB94003ADB97 /* ColorWell.swift */,
+				9F7746031CABBB94003ADB97 /* HuePicker.swift */,
+				9F7746041CABBB94003ADB97 /* PickerImage.swift */,
+				9F7745FF1CABBB4D003ADB97 /* ColorPicker.swift */,
+			);
+			name = ColorPicker;
+			sourceTree = "<group>";
+		};
 		9F8A2E2C1CAA5E25000DFC6D = {
 			isa = PBXGroup;
 			children = (
@@ -97,8 +123,11 @@
 		9F8A2E371CAA5E26000DFC6D /* FlowerBed */ = {
 			isa = PBXGroup;
 			children = (
+				9F7746091CABBBA0003ADB97 /* ColorPicker */,
 				9F8A2E381CAA5E26000DFC6D /* AppDelegate.swift */,
+				9F77462A1CABF27C003ADB97 /* State.swift */,
 				9F8A2E3A1CAA5E26000DFC6D /* ViewController.swift */,
+				9F77460A1CABBC1A003ADB97 /* ColorPickerViewController.swift */,
 				9F8A2E3C1CAA5E26000DFC6D /* Main.storyboard */,
 				9F8A2E3F1CAA5E26000DFC6D /* Assets.xcassets */,
 				9F8A2E411CAA5E26000DFC6D /* LaunchScreen.storyboard */,
@@ -256,8 +285,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F7746071CABBB94003ADB97 /* HuePicker.swift in Sources */,
 				9F8A2E3B1CAA5E26000DFC6D /* ViewController.swift in Sources */,
+				9F7746081CABBB94003ADB97 /* PickerImage.swift in Sources */,
+				9F7746061CABBB94003ADB97 /* ColorWell.swift in Sources */,
 				9F8A2E391CAA5E26000DFC6D /* AppDelegate.swift in Sources */,
+				9F77462B1CABF27C003ADB97 /* State.swift in Sources */,
+				9F7746001CABBB4D003ADB97 /* ColorPicker.swift in Sources */,
+				9F77460B1CABBC1A003ADB97 /* ColorPickerViewController.swift in Sources */,
+				9F7746051CABBB94003ADB97 /* ColorPickerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +520,7 @@
 				9F8A2E5F1CAA5E26000DFC6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9F8A2E601CAA5E26000DFC6D /* Build configuration list for PBXNativeTarget "FlowerBedTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +529,7 @@
 				9F8A2E621CAA5E26000DFC6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9F8A2E631CAA5E26000DFC6D /* Build configuration list for PBXNativeTarget "FlowerBedUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +538,7 @@
 				9F8A2E651CAA5E26000DFC6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
