@@ -89,7 +89,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
         
         self.pageControl.backgroundColor = UIColor.grayColor();
         self.pageControl.numberOfPages = colors.count;
-        self.pageControl.currentPage = 0;
+        self.pageControl.currentPage = (self.state?.currentBedNo)!;
         
         self.pageControl.addTarget(self, action: #selector(self.pageChanged), forControlEvents: UIControlEvents.ValueChanged);
         
